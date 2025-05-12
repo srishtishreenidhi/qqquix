@@ -1,39 +1,44 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+import sys
+import os
+import pytest
+from flask import session
 
-name: Python application
+# Add the root directory to sys.path for import
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+from app import app
 
-permissions:
-  contents: read
+@pytest.fixture
+def client():
+    app.config['TESTING'] = True
+    app.config['SECRET_KEY'] = 'test'
+    with app.test_client() as client:
+        with app.app_context():
+            yield client
 
-jobs:
-  build:
+def test_login_page_loads(client):
+    response = client.get('/login')
+    assert response.status_code == 200
+    assert b"login" in response.data.lower()
 
-    runs-on: ubuntu-latest
+def test_register_page_loads(client):
+    response = client.get('/register')
+    assert response.status_code == 200
+    assert b"register" in response.data.lower()
 
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pytest
+def test_protected_redirects_to_login(client):
+    response = client.get('/')
+    assert response.status_code == 302
+    assert '/login' in response.headers['Location']
+
+def test_quiz_get_requires_login(client):
+    response = client.get('/quiz')
+    assert response.status_code == 302
+    assert '/login' in response.headers['Location']
+
+def test_home_with_login(client):
+    with client.session_transaction() as sess:
+        sess['username'] = 'testuser'
+    response = client.get('/')
+    assert response.status_code == 200
+    assert b"home" in response.data.lower()
