@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .result-container {
+        text-align: center;
+        background: #fff;
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+        color: #4a90e2;
+    }
+    .score {
+        font-size: 22px;
+        font-weight: bold;
+        color: #2c3e50;
+    }
+    .message {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+    .retry-btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 15px;
+        background: #4a90e2;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
+    .retry-btn:hover {
+        background: #357ab8;
+    }
+</style>
+
+<div class="result-container">
+    <h2>Quiz Results</h2>
+    <p class="score">Your Score: {{ score }} / {{ total_questions }}</p>
+
+    {% if score == total_questions %}
+        <p class="message">🎉 Perfect! You're a genius!</p>
+    {% elif score >= total_questions / 2 %}
+        <p class="message">👍 Well done! Keep improving!</p>
+    {% else %}
+        <p class="message">😢 Don't worry, try again!</p>
+    {% endif %}
+
+    <a href="{{ url_for('quiz') }}" class="retry-btn">Try Again</a>
+</div>
+{% endblock %}

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QuizMaster</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      color: #333;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #e91e63;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      font-size: 1rem;
+      color: #444;
+      transition: color 0.3s ease-in-out;
+      position: relative;
+    }
+
+    .navbar ul li a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #e91e63;
+      transition: width 0.3s;
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+    }
+
+    .navbar ul li a:hover {
+      color: #ff4081;
+    }
+
+    .navbar ul li a:hover::after {
+      width: 100%;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1.3rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease-in-out;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn.signup-btn {
+      background: #ff4081;
+      color: white;
+    }
+
+    .btn.login-btn {
+      background: #f8bbd0;
+      color: white;
+    }
+
+    .btn.signup-btn:hover,
+    .btn.login-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .hero {
+      position: relative;
+      background: url("https://via.placeholder.com/1920x600") no-repeat center center/cover;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      z-index: 1;
+      max-width: 90%;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .btn.register-btn {
+      background: #ffc107;
+      color: black;
+      border-radius: 25px;
+    }
+
+    .btn.register-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .explore-section {
+      background: linear-gradient(45deg, #32b0ff, #005794);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .explore-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .redirect-btn {
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    .redirect-btn .btn {
+      background-color: #6200ea;
+      color: white;
+      padding: 0.8rem 2rem;
+    }
+
+    .redirect-btn .btn:hover {
+      background-color: #3700b3;
+      transform: scale(1.05);
+    }
+
+    .highlight {
+      color: #ffd54f;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+
+      .navbar ul {
+        display: none;
+      }
+
+      .nav-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header / Navbar -->
+  <header>
+    <div class="container navbar">
+      <div class="logo">QuizMaster</div>
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('quiz') }}">Explore</a></li>
+        <li><a href="{{ url_for('check_users') }}">Leaderboard</a></li>
+      </ul>
+      <div class="nav-buttons">
+        <a href="{{ url_for('register') }}" class="btn signup-btn">Sign Up</a>
+        <a href="{{ url_for('login') }}" class="btn login-btn">Log In</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h2>Welcome to <span class="highlight">QuizMaster</span></h2>
+      <h1>Test Your Knowledge & Improve Your Skills</h1>
+      <p><i>Sign Up</i> · <i>Compete</i> · <i>Learn</i></p>
+      <a href="{{ url_for('quiz') }}" class="btn register-btn">Explore Quizzes</a>
+    </div>
+  </section>
+
+  <!-- Explore Section -->
+  <section class="explore-section">
+    <div class="container">
+      <h2>Ready to challenge yourself?</h2>
+    </div>
+  </section>
+
+  <!-- Leaderboard Redirect -->
+  <section class="redirect-btn">
+    <div class="container">
+      <a href="{{ url_for('check_users') }}" class="btn">Go to Leaderboard</a>
+    </div>
+  </section>
+
+</body>
+</html>

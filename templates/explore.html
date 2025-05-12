@@ -1,0 +1,143 @@
+<!-- explore.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuizApp</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f4faf8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .title {
+      text-align: center;
+      color: #3b82f6;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 25px;
+    }
+
+    .quiz-form label {
+      display: block;
+      margin: 15px 0 8px;
+      color: #374151;
+      font-weight: 500;
+    }
+
+    .quiz-form input[type="number"],
+    .quiz-form select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .difficulty-options {
+      display: flex;
+      gap: 20px;
+      margin-top: 5px;
+    }
+
+    .difficulty-options label {
+      font-weight: normal;
+    }
+
+    .slider-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .play-btn {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .play-btn:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">QuizApp</h1>
+    <p class="subtitle">The Ultimate Trivia Quiz</p>
+
+    <form class="quiz-form" method="POST" action="{{ url_for('start_quiz') }}">
+
+      <!-- ✅ Dynamic category rendering -->
+      <label for="category">In which category do you want to play the quiz?</label>
+      <select id="category" name="category">
+        <option value="any">Any</option>
+        {% for category in categories %}
+          <option value="{{ category[0] }}">{{ category[0] }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="num_questions">How many questions do you want in your quiz?</label>
+      <input type="number" id="num_questions" name="num_questions" value="5" min="1" max="20" required />
+
+      <label>How difficult do you want your quiz to be?</label>
+      <div class="difficulty-options">
+        <label><input type="radio" name="difficulty" value="easy" /> Easy</label>
+        <label><input type="radio" name="difficulty" value="medium" checked /> Medium</label>
+        <label><input type="radio" name="difficulty" value="hard" /> Hard</label>
+      </div>
+
+      <label for="type">Which type of questions do you want in your quiz?</label>
+      <select id="type" name="type">
+        <option value="">Any</option>
+        <option value="mcq">Multiple Choice</option>
+        <option value="true_false">True / False</option>
+        <option value="descriptive">Descriptive</option>
+      </select>
+
+      <label for="time_per_question">Time per Question (in seconds):</label>
+      <input type="number" name="time_per_question" id="time_per_question" value="30" min="5" required>
+
+      <button type="submit" class="play-btn">Play Now</button>
+    </form>
+  </div>
+
+  <script>
+    // No dynamic JS needed now
+  </script>
+</body>
+</html>

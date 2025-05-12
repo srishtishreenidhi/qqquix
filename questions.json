@@ -1,0 +1,332 @@
+{
+  "general": [
+    {
+      "question": "What is the capital of France?",
+      "options": ["Paris", "London", "Berlin", "Madrid"],
+      "correct_answer": "Paris",
+      "difficulty": "easy",
+      "type": "mcq"
+    },
+    {
+      "question": "Which planet is known as the Red Planet?",
+      "options": ["Earth", "Mars", "Jupiter", "Venus"],
+      "correct_answer": "Mars",
+      "difficulty": "easy",
+      "type": "mcq"
+    },
+    {
+      "question": "The sun rises in the east.",
+      "correct_answer": "True",
+      "difficulty": "easy",
+      "type": "true/false"
+    },
+    {
+      "question": "Name the primary colors.",
+      "correct_answer": "Red, blue, and yellow.",
+      "difficulty": "easy",
+      "type": "descriptive"
+    },
+    {
+      "question": "Which language has the most native speakers?",
+      "options": ["English", "Mandarin", "Hindi", "Spanish"],
+      "correct_answer": "Mandarin",
+      "difficulty": "medium",
+      "type": "mcq"
+    },
+    {
+      "question": "What is the largest ocean on Earth?",
+      "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+      "correct_answer": "Pacific Ocean",
+      "difficulty": "medium",
+      "type": "mcq"
+    },
+    {
+      "question": "Who wrote 'Hamlet'?",
+      "options": ["William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"],
+      "correct_answer": "William Shakespeare",
+      "difficulty": "medium",
+      "type": "mcq"
+    },
+    {
+      "question": "The Great Wall of China is visible from space with the naked eye.",
+      "correct_answer": "False",
+      "difficulty": "medium",
+      "type": "true/false"
+    },
+    {
+      "question": "Explain why exercise is important for health.",
+      "correct_answer": "Exercise improves cardiovascular health, boosts mental well-being, and helps maintain a healthy weight.",
+      "difficulty": "medium",
+      "type": "descriptive"
+    },
+    {
+      "question": "Which country invented paper?",
+      "options": ["Egypt", "China", "India", "Greece"],
+      "correct_answer": "China",
+      "difficulty": "hard",
+      "type": "mcq"
+    },
+    {
+      "question": "Describe the impact of globalization on local cultures.",
+      "correct_answer": "Globalization leads to cultural exchange but may also cause the loss of traditional practices and languages.",
+      "difficulty": "hard",
+      "type": "descriptive"
+    },
+    {
+      "question": "Australia is both a country and a continent.",
+      "correct_answer": "True",
+      "difficulty": "easy",
+      "type": "true/false"
+    },
+    {
+      "question": "Mount Everest is located in Africa.",
+      "correct_answer": "False",
+      "difficulty": "easy",
+      "type": "true/false"
+    },
+    {
+      "question": "New York is the capital of the United States.",
+      "correct_answer": "False",
+      "difficulty": "easy",
+      "type": "true/false"
+    },
+    {
+      "question": "There are seven continents on Earth.",
+      "correct_answer": "True",
+      "difficulty": "easy",
+      "type": "true/false"
+    },
+    {
+      "question": "The Amazon River is the longest river in the world.",
+      "correct_answer": "False",
+      "difficulty": "medium",
+      "type": "true/false"
+    },
+    {
+      "question": "The currency of Japan is the Yen.",
+      "correct_answer": "True",
+      "difficulty": "easy",
+      "type": "true/false"
+    }
+  ],
+  "science": [
+    {
+      "question": "What gas do plants absorb from the atmosphere?",
+      "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+      "correct_answer": "Carbon Dioxide",
+      "difficulty": "easy",
+      "type": "mcq"
+    },
+    {
+      "question": "What is the powerhouse of the cell?",
+      "options": ["Nucleus", "Ribosome", "Mitochondria", "Lysosome"],
+      "correct_answer": "Mitochondria",
+      "difficulty": "easy",
+      "type": "mcq"
+    },
+    {
+      "question": "Water boils at 100°C at sea level.",
+      "correct_answer": "True",
+      "difficulty": "easy",
+      "type": "true/false"
+    },
+    {
+      "question": "What do magnets attract?",
+      "correct_answer": "Materials like iron, nickel, and cobalt.",
+      "difficulty": "easy",
+      "type": "descriptive"
+    },
+    {
+      "question": "Which part of the cell contains genetic material?",
+      "options": ["Cytoplasm", "Nucleus", "Mitochondria", "Ribosome"],
+      "correct_answer": "Nucleus",
+      "difficulty": "medium",
+      "type": "mcq"
+    },
+    {
+      "question": "What is the chemical symbol for gold?",
+      "options": ["Au", "Ag", "Gd", "Go"],
+      "correct_answer": "Au",
+      "difficulty": "medium",
+      "type": "mcq"
+    },
+    {
+      "question": "What part of the human body produces insulin?",
+      "options": ["Pancreas", "Liver", "Kidney", "Heart"],
+      "correct_answer": "Pancreas",
+      "difficulty": "medium",
+      "type": "mcq"
+    },
+    {
+      "question": "What planet is closest to the Sun?",
+      "options": ["Venus", "Mercury", "Earth", "Mars"],
+      "correct_answer": "Mercury",
+      "difficulty": "medium",
+      "type": "mcq"
+    },
+    {
+      "question": "Explain the function of white blood cells.",
+      "correct_answer": "White blood cells defend the body against infection and disease.",
+      "difficulty": "medium",
+      "type": "descriptive"
+    },
+    {
+      "question": "Electrons are larger than protons.",
+      "correct_answer": "False",
+      "difficulty": "hard",
+      "type": "true/false"
+    },
+    {
+      "question": "Describe how genetic traits are inherited.",
+      "correct_answer": "Traits are passed from parents to offspring through genes. Dominant and recessive alleles determine expression.",
+      "difficulty": "hard",
+      "type": "descriptive"
+    },
+    {
+      "question": "Sound travels faster in water than in air.",
+      "correct_answer": "True",
+      "difficulty": "medium",
+      "type": "true/false"
+    },
+    {
+      "question": "Humans have three lungs.",
+      "correct_answer": "False",
+      "difficulty": "easy",
+      "type": "true/false"
+    },
+    {
+      "question": "The Earth revolves around the Sun once every 365 days.",
+      "correct_answer": "True",
+      "difficulty": "easy",
+      "type": "true/false"
+    },
+    {
+      "question": "Light travels slower than sound.",
+      "correct_answer": "False",
+      "difficulty": "medium",
+      "type": "true/false"
+    },
+    {
+      "question": "DNA stands for Deoxyribonucleic Acid.",
+      "correct_answer": "True",
+      "difficulty": "medium",
+      "type": "true/false"
+    },
+    {
+      "question": "Pluto is still classified as a planet in our solar system.",
+      "correct_answer": "False",
+      "difficulty": "medium",
+      "type": "true/false"
+    }
+  ],
+  "tech": [
+    {
+      "question": "Wi-Fi stands for Wireless Fidelity.",
+      "correct_answer": "True",
+      "difficulty": "easy",
+      "type": "true/false"
+    },
+    {
+      "question": "Linux is a proprietary operating system.",
+      "correct_answer": "False",
+      "difficulty": "hard",
+      "type": "true/false"
+    },
+    {
+      "question": "JavaScript can run on both client and server sides.",
+      "correct_answer": "True",
+      "difficulty": "medium",
+      "type": "true/false"
+    },
+    {
+      "question": "The first computer virus was created in the 2000s.",
+      "correct_answer": "False",
+      "difficulty": "medium",
+      "type": "true/false"
+    },
+    {
+      "question": "RAM is used to store files permanently.",
+      "correct_answer": "False",
+      "difficulty": "medium",
+      "type": "true/false"
+    },
+    {
+      "question": "HTML is a programming language.",
+      "correct_answer": "False",
+      "difficulty": "easy",
+      "type": "true/false"
+    },
+    {
+      "question": "Open-source software can be freely modified and distributed.",
+      "correct_answer": "True",
+      "difficulty": "medium",
+      "type": "true/false"
+    },
+    {
+      "question": "IPv6 is the most recent version of the Internet Protocol.",
+      "correct_answer": "True",
+      "difficulty": "medium",
+      "type": "true/false"
+    },
+    {
+      "question": "What does HTML stand for?",
+      "options": ["Hyper Trainer Marking Language", "Hyper Text Markup Language", "Hyper Text Marketing Language", "Hyper Transfer Markup Language"],
+      "correct_answer": "Hyper Text Markup Language",
+      "difficulty": "easy",
+      "type": "mcq"
+    },
+    {
+      "question": "Who is known as the father of the computer?",
+      "options": ["Charles Babbage", "Alan Turing", "Tim Berners-Lee", "Bill Gates"],
+      "correct_answer": "Charles Babbage",
+      "difficulty": "easy",
+      "type": "mcq"
+    },
+    {
+      "question": "What does 'CPU' stand for?",
+      "options": ["Central Processing Unit", "Central Program Utility", "Computer Processing Unit", "Core Programming Unit"],
+      "correct_answer": "Central Processing Unit",
+      "difficulty": "easy",
+      "type": "mcq"
+    },
+    {
+      "question": "What is a web browser?",
+      "correct_answer": "A web browser is software used to access and view websites on the internet.",
+      "difficulty": "easy",
+      "type": "descriptive"
+    },
+    {
+      "question": "Which company developed the Python programming language?",
+      "options": ["Microsoft", "Google", "Python Software Foundation", "Guido van Rossum"],
+      "correct_answer": "Guido van Rossum",
+      "difficulty": "medium",
+      "type": "mcq"
+    },
+    {
+      "question": "Which company owns GitHub?",
+      "options": ["Apple", "Microsoft", "Google", "Amazon"],
+      "correct_answer": "Microsoft",
+      "difficulty": "medium",
+      "type": "mcq"
+    },
+    {
+      "question": "What is the main function of RAM in a computer?",
+      "options": ["Store files permanently", "Process graphics", "Temporary data storage", "Run antivirus"],
+      "correct_answer": "Temporary data storage",
+      "difficulty": "medium",
+      "type": "mcq"
+    },
+    {
+      "question": "Describe how blockchain technology works.",
+      "correct_answer": "Blockchain stores data in blocks that are linked together in a chain and is used for secure, decentralized record-keeping.",
+      "difficulty": "medium",
+      "type": "descriptive"
+    },
+    {
+      "question": "Explain the concept of artificial intelligence and its real-world applications.",
+      "correct_answer": "AI refers to machines that simulate human intelligence. It’s used in speech recognition, recommendation systems, autonomous vehicles, and more.",
+      "difficulty": "hard",
+      "type": "descriptive"
+    }
+  ]
+}

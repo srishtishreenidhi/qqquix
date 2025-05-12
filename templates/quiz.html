@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+    color: #333;
+  }
+
+  .quiz-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #6a1b9a;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  select:focus {
+    outline: none;
+    border-color: #6a1b9a;
+    box-shadow: 0 0 5px rgba(106, 27, 154, 0.4);
+    background-color: #f9f4fc;
+  }
+
+  .start-btn {
+    margin-top: 1.5rem;
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #6a1b9a;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  .start-btn:hover {
+    background-color: #8e24aa;
+    transform: scale(1.02);
+  }
+
+  .start-btn:active {
+    transform: scale(0.98);
+  }
+  .form-group small {
+    display: block;
+    color: #666;
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+
+</style>
+
+<div class="quiz-container">
+  <h2>Select Quiz Settings</h2>
+  <form method="POST" action="{{ url_for('quiz') }}">
+    <div class="form-group">
+      <label for="category">Quiz Category</label>
+      <select name="category" id="category">
+        <option value="general">General Knowledge</option>
+        <option value="science">Science</option>
+        <option value="tech">Technology</option>
+        <option value="history">History</option>
+        <option value="sports">Sports</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="num_questions">Number of Questions</label>
+      <input type="number" id="num_questions" name="num_questions" min="1" max="50" required>
+    </div>
+
+    <div class="form-group">
+      <label for="difficulty">Difficulty Level</label>
+      <select name="difficulty" id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="type">Type of Quiz</label>
+      <select name="type" id="type">
+        <option value="mcq">Multiple Choice Questions</option>
+        
+        <option value="descriptive">Descriptive</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="time_per_question">Total Time Required (in Minutes)</label>
+      <input type="number" id="time_per_question" name="time_per_question" min="10" max="300" value="1" required>
+    </div>
+    
+
+    <button type="submit" class="start-btn">Play Now</button>
+  </form>
+</div>
+{% endblock %}

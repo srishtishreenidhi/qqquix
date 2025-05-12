@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e8f4fc; /* Light blue background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .register-container {
+            background-color: #ffffff;
+            padding: 35px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .register-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            border-color: #28a745;
+            outline: none;
+            box-shadow: 0 0 4px rgba(40, 167, 69, 0.25);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.25s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .register-container p {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .register-container a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        .register-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <h2>Register</h2>
+    <form method="POST">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Enter your username" required>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter your password" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+</div>
+
+</body>
+</html>

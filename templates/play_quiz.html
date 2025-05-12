@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+            margin: 0;
+            padding: 0;
+            transition: background 0.5s ease-in-out;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            animation: fadeIn 0.6s ease-in-out;
+            position: relative;
+        }
+
+        .container:hover {
+            transform: scale(1.01);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+
+        .question-block {
+            margin-bottom: 30px;
+            padding: 20px 25px;
+            background: #fdfdff;
+            border-left: 6px solid #4a90e2;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            animation: fadeQuestion 0.5s ease forwards;
+        }
+
+        .question-block:nth-child(1) { animation-delay: 0.2s; }
+        .question-block:nth-child(2) { animation-delay: 0.4s; }
+        .question-block:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeQuestion {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-block p {
+            font-size: 18px;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin: 8px 0;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+            padding-left: 5px;
+            transition: all 0.2s ease;
+        }
+
+        label:hover span {
+            transform: translateX(5px);
+            color: #4a90e2;
+        }
+
+        label span {
+            display: inline-block;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.1);
+            accent-color: #4a90e2;
+        }
+
+        input[type="radio"]:focus + span,
+        input[type="radio"]:checked + span {
+            outline: none;
+            color: #4a90e2;
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: vertical;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        textarea:focus {
+            border-color: #4a90e2;
+            outline: none;
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            background-color: #4a90e2;
+            color: white;
+            font-size: 18px;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 20px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        button[type="submit"]:hover {
+            background-color: #357ab8;
+            transform: translateY(-2px);
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.97);
+        }
+
+        /* Timer Styling */
+        #timer {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #e74c3c;
+            background-color: #fefefe;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            animation: pulseTimer 2s infinite;
+        }
+
+        @keyframes pulseTimer {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px 10px;
+                padding: 20px;
+            }
+
+            #timer {
+                position: static;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="timer">Time Left: 10:00</div>
+
+        <h1>Quiz Time!</h1>
+
+        <form id="quizForm" action="{{ url_for('submit_quiz') }}" method="POST">
+
+            {% for q in questions %}
+                <div class="question-block">
+                    <p><b>{{ loop.index }}. {{ q.question }}</b></p>
+
+                    {% if q.type == 'mcq' or q.type == 'boolean' %}
+                        {% for option in q.options %}
+                            <label>
+                                <input type="radio" name="q{{ loop.index }}" value="{{ option }}">
+                                <span>{{ option }}</span>
+                            </label>
+                        {% endfor %}
+                    {% elif q.type == 'descriptive' %}
+                        <textarea name="q{{ loop.index }}" rows="3" placeholder="Type your answer here..."></textarea>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // Timer Logic
+        let totalTime = 1 * 60; // 10 minutes in seconds
+        const timerDisplay = document.getElementById("timer");
+        const form = document.getElementById("quizForm");
+
+        function startTimer() {
+            const timer = setInterval(() => {
+                let minutes = Math.floor(totalTime / 60);
+                let seconds = totalTime % 60;
+
+                timerDisplay.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                totalTime--;
+
+                if (totalTime < 0) {
+                    clearInterval(timer);
+                    timerDisplay.textContent = "Time's up!";
+                    form.submit(); // auto-submit form
+                }
+            }, 1000);
+        }
+
+        startTimer();
+    </script>
+</body>
+</html>

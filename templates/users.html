@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registered Users</title>
+    <style>
+        /* General Reset & Layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .wrapper {
+            flex: 1;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #0399f7;
+            color: #fff;
+            padding: 1rem 0;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 1rem;
+        }
+
+        .leaderboard-section {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+
+        .leaderboard-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #0399f7;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .leaderboard-table th,
+        .leaderboard-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .leaderboard-table th {
+            background-color: #0399f7;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .leaderboard-table td {
+            font-size: 1rem;
+        }
+
+        .leaderboard-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .leaderboard-table tr:hover {
+            background-color: #e0e7ff;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #0399f7;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- Header with Navbar -->
+        <div class="header">
+            <div class="container">
+                <h1>Quiz Master</h1>
+                <nav class="navbar">
+                    <a href="home.html">Home</a>
+                    <a href="quizzes.html">Quizzes</a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="leaderboard-section">
+                <h2>Leader Board</h2>
+                <table class="leaderboard-table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Marks (Results)</th>
+                    </tr>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user[0] }}</td>
+                        <td>{{ user[1] }}</td>
+                        <td>{{ user[3] }}</td>  <!-- Assuming marks are stored in the 4th column -->
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Quiz Master. All rights reserved.</p>
+    </div>
+
+</body>
+</html>
