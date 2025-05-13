@@ -1,4 +1,4 @@
-name: Flask Pytest Tests (with MySQL)
+name: Flask Pytest Tests with MySQL
 
 on:
   push:
@@ -9,22 +9,23 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    
     services:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: srishti@2004  # Stronger password recommended
-          MYSQL_DATABASE: quiz_app1
-          MYSQL_USER: root
-          MYSQL_PASSWORD: srishti@2004  # Stronger password recommended
+          MYSQL_ROOT_PASSWORD: rootpassword
+          MYSQL_DATABASE: testdb
+          MYSQL_USER: testuser
+          MYSQL_PASSWORD: testpassword
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -p$$MYSQL_ROOT_PASSWORD"
+          --health-cmd="mysqladmin ping -uroot -prootpassword"
           --health-interval=10s
           --health-timeout=5s
-          --health-retries=5
-        # Critical addition:
+          --health-retries=10
+        # Critical for MySQL 8.0:
         volumes:
           - mysql-data:/var/lib/mysql
 
@@ -32,8 +33,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v5
+    - name: Set up Python
+      uses: actions/setup-python@v4
       with:
         python-version: '3.11'
 
@@ -42,24 +43,27 @@ jobs:
         python -m pip install --upgrade pip
         pip install flask pytest mysql-connector-python
 
-    - name: Wait for MySQL to be ready
+    - name: Wait for MySQL
+      timeout-minutes: 3
       run: |
+        echo "Waiting for MySQL to start..."
         for i in {1..30}; do
-          if nc -z localhost 3306; then
+          if docker exec ${{ job.services.mysql.id }} mysqladmin ping -uroot -prootpassword --silent; then
             echo "MySQL is ready!"
             exit 0
           fi
-          sleep 2
+          sleep 5
         done
         echo "MySQL failed to start"
+        docker logs ${{ job.services.mysql.id }}
         exit 1
 
     - name: Run tests
       env:
-        DB_HOST: 127.0.0.1  # Must use 127.0.0.1 (not localhost)
+        DB_HOST: 127.0.0.1
         DB_PORT: 3306
         DB_USER: testuser
-        DB_PASSWORD: testpass
-        DB_NAME: test_db
+        DB_PASSWORD: testpassword
+        DB_NAME: testdb
       run: |
-        pytest
+        pytest -v
