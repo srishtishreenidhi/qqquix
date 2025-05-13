@@ -1,4 +1,4 @@
-name: Flask Pytest Tests
+name: Flask Pytest Tests (with MySQL)
 
 on:
   push:
@@ -9,6 +9,19 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    # Start a MySQL service container
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: srishti@2004
+          MYSQL_DATABASE: quiz_app1
+          MYSQL_USER: root
+        
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
     - name: Checkout repository
@@ -22,8 +35,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flask pytest  # Only install Flask and pytest (no MySQL)
+        pip install flask pytest mysql-connector-python  # Install MySQL driver
 
     - name: Run tests
+      env:
+        DB_HOST: localhost
+        DB_PORT: 3306
+        DB_USER: root
+        DB_PASSWORD: srishti@2004
+        DB_NAME: quiz_app1
       run: |
-        pytest  # Runs all your non-database tests
+        pytest
