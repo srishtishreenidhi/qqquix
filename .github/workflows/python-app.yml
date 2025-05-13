@@ -9,22 +9,27 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    # Start a MySQL service container
     services:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: srishti@2004
+          MYSQL_ROOT_PASSWORD: srishti@2004  # Stronger password recommended
           MYSQL_DATABASE: quiz_app1
           MYSQL_USER: root
-        
+          MYSQL_PASSWORD: srishti@2004  # Stronger password recommended
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: >-
+          --health-cmd="mysqladmin ping -p$$MYSQL_ROOT_PASSWORD"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+        # Critical addition:
+        volumes:
+          - mysql-data:/var/lib/mysql
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v3
 
     - name: Set up Python 3.11
@@ -35,14 +40,26 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flask pytest mysql-connector-python  # Install MySQL driver
+        pip install flask pytest mysql-connector-python
+
+    - name: Wait for MySQL to be ready
+      run: |
+        for i in {1..30}; do
+          if nc -z localhost 3306; then
+            echo "MySQL is ready!"
+            exit 0
+          fi
+          sleep 2
+        done
+        echo "MySQL failed to start"
+        exit 1
 
     - name: Run tests
       env:
-        DB_HOST: localhost
+        DB_HOST: 127.0.0.1  # Must use 127.0.0.1 (not localhost)
         DB_PORT: 3306
-        DB_USER: root
-        DB_PASSWORD: srishti@2004
-        DB_NAME: quiz_app1
+        DB_USER: testuser
+        DB_PASSWORD: testpass
+        DB_NAME: test_db
       run: |
         pytest
